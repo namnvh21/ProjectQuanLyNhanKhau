@@ -1,0 +1,139 @@
+Table User {
+  Id int
+  UserName text
+  Password text
+}
+
+Table NhanKhau {
+  Id int [not null, PK]
+  MaNhanKhau text [not null]
+	HoTen text [not null]
+	HoTenKhac text [not null]
+  NamSinh date [not null]
+  GioiTinh text [not null]
+  NoiSinh text [not null]
+  NguyenQuan text [not null]
+  DanToc text [not null]
+  TonGiao text [not null]
+  QuocTich text [not null]
+  SoCMND text [not null]
+  SoHeChieu text [not null]
+  NoiThuongTru text [not null]
+  DiaChiChoOHienNay text [not null]
+  TrinhDoHocVan text [not null]
+  TrinhDoChuyenMon text [not null]
+  BietTiengDanToc text [not null]
+  TrinhDoNgoaiNgu text [not null]
+  NgheNghiepNoiLamViec text [not null]
+  TienAn text [not null]
+  NgayChuyenDen date [not null]
+  LyDoChuyenDen text
+  NgayChuyenDi date
+  LyDoChuyenDi text
+  DiaChiMoi text
+  NgayXoa date 
+  IdNguoiXoa int 
+  GhiChu text [not null]
+}
+
+Table ThanhVienCuaHo {
+  IdNhanKhau int
+  IdHoKhau int
+  QuanHeVoiChuHo text
+}
+
+Table TomTatBanThan {
+  Id int [PK]
+  IdNhanKhau int 
+  TuNgay date
+  DenNgay date
+  ChoO text
+  NgheNghiepNoiLamViec text
+}
+
+Table GiaDinh {
+  Id int [PK]
+  IdNhanKhau int 
+  STT int 
+  HoTen text
+  NamSinh date
+  GioiTinh text
+  QuanHe text
+  NgheNghiep text
+  DiaChiChoOHienNay text
+}
+
+Table DinhChinh {
+  Id int [PK]
+  IdHoKhau int
+  NoiDungThayDoiTu text
+  NoiDungThayDoiThanh text
+  NgayThayDoi text
+  NguoiThucHien int
+}
+
+Table HoKhau {
+  Id int [not null, PK]
+  MaHoKhau text [not null]
+  HoTenChuHo text [not null]
+  MaKhuVuc text [not null]
+  DiaChi text [not null]
+  NgayLap date [not null]
+}
+
+Table KhaiTu {
+  Id int [not null, PK]
+  SoGiayKhaiTu text [not null]
+  IdNguoiKhai int [not null]
+  IdNguoiChet int [not null]
+  NgayChet date [not null]
+  NgayKhai date [not null]
+  LyDoChet text [not null]
+}
+
+Table TamVang {
+  Id int [not null, PK]
+  IdNhanKhau int
+  MaGiayTamVang text [not null]
+  NoiThuongTruTamTru text [not null]
+  TamVangTuNgay date [not null]
+  TamVangDenNgay date [not null]
+  LyDoTamVang text [not null]
+}
+
+Table TamTru {
+  Id int [not null, PK]
+  IdNhanKhau int
+  MaGiayTamTru text [not null]
+  HoTenNV text [not null]
+  GioiTinhNV text [not null]
+  SoCMNDNV text [not null]
+  SoHoChieuNV text [not null]
+  NoiThuongTruNV text [not null]
+  DiaChiChoOHienNayNV text [not null]
+  SoDienThoaiLienHeNV text [not null]
+  SoDienThoaiLienHeNDK text [not null]
+  HoTenChuHo text [not null]
+  QuanHeVoiChuHo text [not null]
+  NoiDungThayDoi text [not null]
+}
+
+Ref: "NhanKhau"."Id" < "ThanhVienCuaHo"."IdNhanKhau"
+
+Ref: "HoKhau"."Id" < "ThanhVienCuaHo"."IdHoKhau"
+
+Ref: "NhanKhau"."Id" < "TomTatBanThan"."IdNhanKhau"
+
+Ref: "GiaDinh"."IdNhanKhau" < "NhanKhau"."Id"
+
+Ref: "DinhChinh"."IdHoKhau" < "HoKhau"."Id"
+
+Ref: "DinhChinh"."NguoiThucHien" < "User"."Id"
+
+Ref: "TamTru"."IdNhanKhau" < "NhanKhau"."Id"
+
+Ref: "TamVang"."IdNhanKhau" < "NhanKhau"."Id"
+
+Ref: "KhaiTu"."IdNguoiChet" < "NhanKhau"."Id"
+
+Ref: "KhaiTu"."SoGiayKhaiTu" < "NhanKhau"."Id"
